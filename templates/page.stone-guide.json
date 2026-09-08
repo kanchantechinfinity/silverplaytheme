@@ -1,6 +1,10 @@
 {
   "sections": {
-    "main": { "type": "main-page-stone-guide" }
+    "main": {
+      "type": "main-page-stone-guide"
+    }
   },
-  "order": ["main"]
+  "order": [
+    "main"
+  ]
 }

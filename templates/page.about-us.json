@@ -1,12 +1,34 @@
 {
   "sections": {
-    "hero": { "type": "main-page-about" },
-    "founder": { "type": "founder" },
-    "craft": { "type": "about-craft" },
-    "vision": { "type": "about-vision" },
-    "values": { "type": "about-values" },
-    "testimonials": { "type": "testimonials" },
-    "closing": { "type": "about-closing" }
+    "hero": {
+      "type": "main-page-about"
+    },
+    "founder": {
+      "type": "founder"
+    },
+    "craft": {
+      "type": "about-craft"
+    },
+    "vision": {
+      "type": "about-vision"
+    },
+    "values": {
+      "type": "about-values"
+    },
+    "testimonials": {
+      "type": "testimonials"
+    },
+    "closing": {
+      "type": "about-closing"
+    }
   },
-  "order": ["hero", "founder", "craft", "vision", "values", "testimonials", "closing"]
+  "order": [
+    "hero",
+    "founder",
+    "craft",
+    "vision",
+    "values",
+    "testimonials",
+    "closing"
+  ]
 }
