@@ -46,31 +46,108 @@
 
 {% schema %}
 {
-  "name": "The Archive Silver Treasure",
+  "name": "Archive Silver Treasure",
   "blocks": [
     {
       "type": "collection",
       "name": "Collection",
       "settings": [
-        { "type": "text", "id": "deva", "label": "Hindi name" },
-        { "type": "text", "id": "title", "label": "Title (overrides collection title)" },
-        { "type": "collection", "id": "collection", "label": "Collection (drives link + fallback back image)" },
-        { "type": "url", "id": "collection_url", "label": "Collection link (used if no collection picked)" },
-        { "type": "url", "id": "front_image", "label": "Front (archival) image" },
-        { "type": "url", "id": "back_image", "label": "Back image (overrides collection's first product image)" }
+        {
+          "type": "text",
+          "id": "deva",
+          "label": "Hindi name"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title (overrides collection title)"
+        },
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "Collection (drives link + fallback back image)"
+        },
+        {
+          "type": "url",
+          "id": "collection_url",
+          "label": "Collection link (used if no collection picked)"
+        },
+        {
+          "type": "url",
+          "id": "front_image",
+          "label": "Front (archival) image"
+        },
+        {
+          "type": "url",
+          "id": "back_image",
+          "label": "Back image (overrides collection's first product image)"
+        }
       ]
     }
   ],
   "default": {
     "blocks": [
-      { "type": "collection", "settings": { "deva": "विरासत", "title": "Heritage", "collection_url": "/collections/virasat", "front_image": "https://silverplay.in/cdn/shop/files/Rajsi_SP_Website_41ccae1d-7e58-4695-b942-459bc0411093_800x1200_crop_center.png?v=1781610360", "back_image": "https://cdn.shopify.com/s/files/1/0702/4456/5101/files/sterling-silver-paan-leaf-drop-earrings.png?v=1786310303" } },
-      { "type": "collection", "settings": { "deva": "कारीगरी", "title": "Craftsmanship", "collection_url": "/collections/karigari-1", "front_image": "https://silverplay.in/cdn/shop/files/8_66ed8200-edb7-48db-85c0-60bc06df74ca_800x1200_crop_center.png?v=1781618694", "back_image": "https://cdn.shopify.com/s/files/1/0702/4456/5101/files/sterling-silver-conch-shell-filigree-earrings.png?v=1786310431" } },
-      { "type": "collection", "settings": { "deva": "रत्न विरासत", "title": "Gemstone Heritage", "collection_url": "/collections/ratna-virasat-1", "front_image": "https://silverplay.in/cdn/shop/files/5_800x1200_crop_center.png?v=1780901024", "back_image": "https://cdn.shopify.com/s/files/1/0702/4456/5101/files/sterling-silver-prairie-rose-office-earring.png?v=1786310324" } },
-      { "type": "collection", "settings": { "deva": "नज़ाकत", "title": "Elegance", "collection_url": "/collections/nazakat-1", "front_image": "https://silverplay.in/cdn/shop/files/10_bd25934c-b7a1-4db5-adaf-80994f406f55_800x1200_crop_center.png?v=1781618694", "back_image": "https://cdn.shopify.com/s/files/1/0702/4456/5101/files/sterling-silver-teardrop-fan-stud-earrings.png?v=1786310365" } },
-      { "type": "collection", "settings": { "deva": "शाही", "title": "Regal", "collection_url": "/collections/raajsi-shahi", "front_image": "https://silverplay.in/cdn/shop/files/SP_Website_Banners_10_800x1200_crop_center.png?v=1783577220", "back_image": "https://cdn.shopify.com/s/files/1/0702/4456/5101/files/sterling-silver-ornate-chandbali-drop-earrings.png?v=1786310348" } },
-      { "type": "collection", "settings": { "deva": "चांदनी", "title": "Lunar Glow", "collection_url": "/collections/chandini", "front_image": "https://silverplay.in/cdn/shop/files/SP_Website_Banners_9_800x1200_crop_center.png?v=1783577220", "back_image": "https://cdn.shopify.com/s/files/1/0702/4456/5101/files/sterling-silver-blossom-jhumka-earrings.png?v=1786310364" } }
+      {
+        "type": "collection",
+        "settings": {
+          "deva": "विरासत",
+          "title": "Heritage",
+          "collection_url": "/collections/virasat",
+          "front_image": "https://silverplay.in/cdn/shop/files/Rajsi_SP_Website_41ccae1d-7e58-4695-b942-459bc0411093_800x1200_crop_center.png?v=1781610360",
+          "back_image": "https://cdn.shopify.com/s/files/1/0702/4456/5101/files/sterling-silver-paan-leaf-drop-earrings.png?v=1786310303"
+        }
+      },
+      {
+        "type": "collection",
+        "settings": {
+          "deva": "कारीगरी",
+          "title": "Craftsmanship",
+          "collection_url": "/collections/karigari-1",
+          "front_image": "https://silverplay.in/cdn/shop/files/8_66ed8200-edb7-48db-85c0-60bc06df74ca_800x1200_crop_center.png?v=1781618694",
+          "back_image": "https://cdn.shopify.com/s/files/1/0702/4456/5101/files/sterling-silver-conch-shell-filigree-earrings.png?v=1786310431"
+        }
+      },
+      {
+        "type": "collection",
+        "settings": {
+          "deva": "रत्न विरासत",
+          "title": "Gemstone Heritage",
+          "collection_url": "/collections/ratna-virasat-1",
+          "front_image": "https://silverplay.in/cdn/shop/files/5_800x1200_crop_center.png?v=1780901024",
+          "back_image": "https://cdn.shopify.com/s/files/1/0702/4456/5101/files/sterling-silver-prairie-rose-office-earring.png?v=1786310324"
+        }
+      },
+      {
+        "type": "collection",
+        "settings": {
+          "deva": "नज़ाकत",
+          "title": "Elegance",
+          "collection_url": "/collections/nazakat-1",
+          "front_image": "https://silverplay.in/cdn/shop/files/10_bd25934c-b7a1-4db5-adaf-80994f406f55_800x1200_crop_center.png?v=1781618694",
+          "back_image": "https://cdn.shopify.com/s/files/1/0702/4456/5101/files/sterling-silver-teardrop-fan-stud-earrings.png?v=1786310365"
+        }
+      },
+      {
+        "type": "collection",
+        "settings": {
+          "deva": "शाही",
+          "title": "Regal",
+          "collection_url": "/collections/raajsi-shahi",
+          "front_image": "https://silverplay.in/cdn/shop/files/SP_Website_Banners_10_800x1200_crop_center.png?v=1783577220",
+          "back_image": "https://cdn.shopify.com/s/files/1/0702/4456/5101/files/sterling-silver-ornate-chandbali-drop-earrings.png?v=1786310348"
+        }
+      },
+      {
+        "type": "collection",
+        "settings": {
+          "deva": "चांदनी",
+          "title": "Lunar Glow",
+          "collection_url": "/collections/chandini",
+          "front_image": "https://silverplay.in/cdn/shop/files/SP_Website_Banners_9_800x1200_crop_center.png?v=1783577220",
+          "back_image": "https://cdn.shopify.com/s/files/1/0702/4456/5101/files/sterling-silver-blossom-jhumka-earrings.png?v=1786310364"
+        }
+      }
     ]
-  },
-  "presets": [{ "name": "The Archive Silver Treasure" }]
+  }
 }
 {% endschema %}

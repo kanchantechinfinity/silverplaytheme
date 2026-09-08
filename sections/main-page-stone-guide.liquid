@@ -48,7 +48,8 @@
                 <p class="tagline">{{ block.settings.tagline }}</p>
                 <p class="meaning">{{ block.settings.meaning }}</p>
                 <ul class="stone-card__props">
-                  {%- for line in block.settings.properties | newline_to_br | split: '<br />' -%}
+                  {%- assign prop_lines = block.settings.properties | newline_to_br | split: '<br />' -%}
+                  {%- for line in prop_lines -%}
                     {%- assign trimmed = line | strip -%}
                     {%- if trimmed != blank -%}<li>{{ trimmed }}</li>{%- endif -%}
                   {%- endfor -%}
@@ -434,11 +435,6 @@
         }
       }
     ]
-  },
-  "presets": [
-    {
-      "name": "Stone guide explorer"
-    }
-  ]
+  }
 }
 {% endschema %}
