@@ -1,0 +1,47 @@
+<div class="sp-container collection-page" style="padding-top:160px;padding-bottom:120px;">
+  <div class="section-head reveal" style="margin-bottom:8px;">
+    <p class="eyebrow">Silver Play</p>
+    <h1>{{ collection.title }}</h1>
+    {%- if collection.description != blank -%}
+      <div class="collection-page__description">{{ collection.description }}</div>
+    {%- endif -%}
+  </div>
+
+  <div class="collection-page__toolbar">
+    <p class="collection-page__count">{{ collection.products_count }} product{% if collection.products_count != 1 %}s{% endif %}</p>
+    <form method="get" class="collection-page__sort" data-collection-sort-form>
+      <label for="SortBy">Sort by</label>
+      <select name="sort_by" id="SortBy" onchange="this.form.submit()">
+        {%- for option in collection.sort_options -%}
+          <option value="{{ option.value }}"{% if option.value == collection.sort_by %} selected{% endif %}>{{ option.name }}</option>
+        {%- endfor -%}
+      </select>
+    </form>
+  </div>
+
+  {% paginate collection.products by 24 %}
+    <div class="product-grid">
+      {%- for product in collection.products -%}
+        {% render 'product-card', product: product %}
+      {%- else -%}
+        <p>No products in this collection yet.</p>
+      {%- endfor -%}
+    </div>
+
+    {%- if paginate.pages > 1 -%}
+      <nav class="collection-page__pagination" role="navigation" aria-label="Pagination">
+        {%- if paginate.previous -%}<a href="{{ paginate.previous.url }}" class="pagination-link">&larr; Prev</a>{%- endif -%}
+        {%- for part in paginate.parts -%}
+          {%- if part.is_link -%}
+            <a href="{{ part.url }}" class="pagination-link">{{ part.title }}</a>
+          {%- else -%}
+            <span class="pagination-link is-current">{{ part.title }}</span>
+          {%- endif -%}
+        {%- endfor -%}
+        {%- if paginate.next -%}<a href="{{ paginate.next.url }}" class="pagination-link">Next &rarr;</a>{%- endif -%}
+      </nav>
+    {%- endif -%}
+  {% endpaginate %}
+</div>
+
+{% schema %} { "name": "Collection", "settings": [] } {% endschema %}

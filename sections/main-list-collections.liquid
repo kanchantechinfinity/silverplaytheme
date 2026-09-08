@@ -1,0 +1,9 @@
+<div class="sp-container" style="padding-top:160px;padding-bottom:80px;">
+  <h1>Collections</h1>
+  <ul>
+    {% for collection in collections %}
+      <li><a href="{{ collection.url }}">{{ collection.title }}</a></li>
+    {% endfor %}
+  </ul>
+</div>
+{% schema %} { "name": "List Collections", "settings": [] } {% endschema %}

@@ -1,0 +1,40 @@
+<div class="sp-container blog-page" style="padding-top:160px;padding-bottom:120px;">
+  <div class="section-head reveal" style="margin-bottom:48px;">
+    <p class="eyebrow">From The Journal</p>
+    <h1>{{ blog.title }}</h1>
+  </div>
+
+  {% paginate blog.articles by 9 %}
+    <div class="blog-grid">
+      {%- for article in blog.articles -%}
+        <a href="{{ article.url }}" class="journal-card blog-grid__card">
+          {%- if article.image -%}
+            <img src="{{ article.image | image_url: width: 620 }}" alt="{{ article.title | escape }}" loading="lazy" width="620" height="480">
+          {%- endif -%}
+          <div class="journal-card__wash"></div>
+          <div class="journal-card__row">
+            <div>
+              <p class="eyebrow" style="color:rgba(242,232,208,0.7);margin-bottom:6px;">{{ article.published_at | date: "%B %d, %Y" }}</p>
+              <h3>{{ article.title }}</h3>
+            </div>
+            <span class="journal-card__go">&rarr;</span>
+          </div>
+        </a>
+      {%- else -%}
+        <p>No journal entries yet.</p>
+      {%- endfor -%}
+    </div>
+
+    {%- if paginate.pages > 1 -%}
+      <nav class="collection-page__pagination" role="navigation" aria-label="Pagination">
+        {%- if paginate.previous -%}<a href="{{ paginate.previous.url }}" class="pagination-link">&larr; Prev</a>{%- endif -%}
+        {%- for part in paginate.parts -%}
+          {%- if part.is_link -%}<a href="{{ part.url }}" class="pagination-link">{{ part.title }}</a>{%- else -%}<span class="pagination-link is-current">{{ part.title }}</span>{%- endif -%}
+        {%- endfor -%}
+        {%- if paginate.next -%}<a href="{{ paginate.next.url }}" class="pagination-link">Next &rarr;</a>{%- endif -%}
+      </nav>
+    {%- endif -%}
+  {% endpaginate %}
+</div>
+
+{% schema %} { "name": "Blog", "settings": [] } {% endschema %}

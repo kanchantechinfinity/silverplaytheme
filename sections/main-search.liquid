@@ -1,0 +1,38 @@
+<div class="sp-container search-page" style="padding-top:160px;padding-bottom:120px;">
+  <div class="section-head reveal" style="margin-bottom:32px;">
+    <p class="eyebrow">Silver Play</p>
+    <h1>Search</h1>
+    {% form 'search', role: 'search' %}
+      <div class="search-page__field">
+        <input type="search" name="q" value="{{ search.terms | escape }}" placeholder="Search products, journal, pages…" aria-label="Search">
+        <input type="hidden" name="type" value="product,article,page">
+        <button type="submit" aria-label="Submit search">
+          <svg width="19" height="19" viewBox="0 0 23 23" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="7.5"/><path d="m20.5 20.5-4.35-4.35"/></svg>
+        </button>
+      </div>
+    {% endform %}
+  </div>
+
+  {%- if search.performed -%}
+    <p class="collection-page__count">{{ search.results_count }} result{% if search.results_count != 1 %}s{% endif %} for &ldquo;{{ search.terms }}&rdquo;</p>
+    <div class="product-grid">
+      {%- for item in search.results -%}
+        {%- if item.object_type == 'product' -%}
+          {% render 'product-card', product: item %}
+        {%- else -%}
+          <a href="{{ item.url }}" class="journal-card" style="width:100%;height:320px;">
+            {%- if item.image or item.featured_image -%}
+              <img src="{{ item.image | default: item.featured_image | image_url: width: 620 }}" alt="{{ item.title | escape }}" loading="lazy">
+            {%- endif -%}
+            <div class="journal-card__wash"></div>
+            <div class="journal-card__row"><h3>{{ item.title }}</h3><span class="journal-card__go">&rarr;</span></div>
+          </a>
+        {%- endif -%}
+      {%- else -%}
+        <p>No results found.</p>
+      {%- endfor -%}
+    </div>
+  {%- endif -%}
+</div>
+
+{% schema %} { "name": "Search", "settings": [] } {% endschema %}

@@ -1,0 +1,65 @@
+{% comment %}
+  Heritage-paper product tile — data-driven from a real Shopify `product` object.
+  Usage: {% render 'product-card', product: product %}
+  Optional: image_width (default 480)
+{% endcomment %}
+{%- liquid
+  assign img_w = image_width | default: 480
+  assign featured = product.featured_image
+  assign hover_image = product.images[1]
+  assign on_sale = false
+  if product.compare_at_price > product.price
+    assign on_sale = true
+  endif
+  assign sold_out = false
+  if product.available == false
+    assign sold_out = true
+  endif
+  assign quick_add = false
+  if product.available and product.has_only_default_variant
+    assign quick_add = true
+  endif
+-%}
+<div class="product-card" data-product-card data-product-id="{{ product.id }}">
+  <a href="{{ product.url }}" class="product-card__link">
+    <div class="deckle-wrap">
+      <div class="deckle-inner">
+        <div class="product-card__media">
+          {%- if featured -%}
+            <img class="main" src="{{ featured | image_url: width: img_w }}" alt="{{ product.title | escape }}" loading="lazy" width="{{ img_w }}" height="{{ img_w | times: 1.25 | round }}">
+          {%- else -%}
+            <img class="main" src="{{ 'product-placeholder' | placeholder_svg_tag }}" alt="{{ product.title | escape }}" loading="lazy" width="{{ img_w }}" height="{{ img_w | times: 1.25 | round }}">
+          {%- endif -%}
+          {%- if hover_image -%}
+            <img class="alt" src="{{ hover_image | image_url: width: img_w }}" alt="" loading="lazy" width="{{ img_w }}" height="{{ img_w | times: 1.25 | round }}">
+          {%- endif -%}
+          <div class="product-card__vignette"></div>
+          {%- if on_sale -%}
+            <span class="product-card__badge">Sale</span>
+          {%- elsif sold_out -%}
+            <span class="product-card__badge">Sold Out</span>
+          {%- endif -%}
+        </div>
+        <div class="product-card__body">
+          <h3 class="product-card__title">{{ product.title }}</h3>
+          <p class="product-card__price">
+            {{ product.price | money }}
+            {%- if on_sale -%}<span class="product-card__compare">{{ product.compare_at_price | money }}</span>{%- endif -%}
+          </p>
+        </div>
+      </div>
+    </div>
+  </a>
+  {%- if quick_add -%}
+    <button
+      type="button"
+      class="product-card__cta"
+      data-quick-add
+      data-variant-id="{{ product.selected_or_first_available_variant.id }}"
+    >Quick Add</button>
+  {%- elsif sold_out -%}
+    <span class="product-card__cta product-card__cta--disabled">Sold Out</span>
+  {%- else -%}
+    <a href="{{ product.url }}" class="product-card__cta">View Options</a>
+  {%- endif -%}
+</div>

@@ -1,0 +1,34 @@
+{
+  "sections": {
+    "hero": { "type": "hero" },
+    "assurance_bar": { "type": "assurance-bar" },
+    "gen_z_edit": { "type": "gen-z-edit" },
+    "royal_simplicity": { "type": "royal-simplicity" },
+    "best_sellers": { "type": "best-sellers" },
+    "archive_treasure": { "type": "archive-treasure" },
+    "cool_girl_silver": { "type": "cool-girl-silver" },
+    "shop_by_occasion": { "type": "shop-by-occasion" },
+    "instagram_slider": { "type": "instagram-slider" },
+    "founder": { "type": "founder" },
+    "effortless_elegance": { "type": "effortless-elegance" },
+    "testimonials": { "type": "testimonials" },
+    "journal_showcase": { "type": "journal-showcase" },
+    "faq": { "type": "faq" }
+  },
+  "order": [
+    "hero",
+    "assurance_bar",
+    "gen_z_edit",
+    "royal_simplicity",
+    "best_sellers",
+    "archive_treasure",
+    "cool_girl_silver",
+    "shop_by_occasion",
+    "instagram_slider",
+    "founder",
+    "effortless_elegance",
+    "testimonials",
+    "journal_showcase",
+    "faq"
+  ]
+}

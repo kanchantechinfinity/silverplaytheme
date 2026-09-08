@@ -1,0 +1,143 @@
+{%- liquid
+  assign logo_mark = section.settings.logo_mark
+-%}
+<header class="site-header">
+  <div class="site-header__bar" data-header-bar>
+    <button class="site-header__burger" aria-label="Open menu" data-menu-open>
+      <span></span><span></span><span></span>
+    </button>
+
+    <a href="{{ routes.root_url }}" class="site-header__logo">
+      {%- if logo_mark != blank -%}
+        <img src="{{ logo_mark | image_url: width: 320 }}" alt="{{ shop.name }}" width="160" height="160" loading="eager">
+      {%- else -%}
+        <img src="https://silverplay.in/cdn/shop/files/SP_WHite_log_SHort.png" alt="{{ shop.name }}" width="160" height="160" loading="eager">
+      {%- endif -%}
+    </a>
+
+    <nav class="site-header__nav">
+      {%- assign menu = linklists[section.settings.main_menu] -%}
+      {%- if menu != blank -%}
+        {%- for link in menu.links -%}
+          <div class="site-header__nav-item">
+            <a href="{{ link.url }}" class="site-header__link">{{ link.title }}</a>
+            {%- if link.title == 'Collections' or link.title == 'Shop' -%}
+              {% render 'mega-nav' %}
+            {%- elsif link.links != blank -%}
+              <div class="site-header__dropdown">
+                {%- for child_link in link.links -%}
+                  <a href="{{ child_link.url }}">{{ child_link.title }}</a>
+                {%- endfor -%}
+              </div>
+            {%- endif -%}
+          </div>
+        {%- endfor -%}
+      {%- else -%}
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'nav_link' -%}
+            <div class="site-header__nav-item">
+              <a href="{{ block.settings.url }}" class="site-header__link">{{ block.settings.label }}</a>
+
+              {%- if block.settings.show_mega_nav -%}
+                {% render 'mega-nav' %}
+              {%- elsif block.settings.child_1_label != blank -%}
+                <div class="site-header__dropdown">
+                  {%- if block.settings.child_1_label != blank -%}<a href="{{ block.settings.child_1_url }}">{{ block.settings.child_1_label }}</a>{%- endif -%}
+                  {%- if block.settings.child_2_label != blank -%}<a href="{{ block.settings.child_2_url }}">{{ block.settings.child_2_label }}</a>{%- endif -%}
+                  {%- if block.settings.child_3_label != blank -%}<a href="{{ block.settings.child_3_url }}">{{ block.settings.child_3_label }}</a>{%- endif -%}
+                </div>
+              {%- endif -%}
+            </div>
+          {%- endif -%}
+        {%- endfor -%}
+      {%- endif -%}
+    </nav>
+
+    <div class="site-header__icons">
+      <button type="button" class="site-header__icon" aria-label="Search" data-search-open>
+        <svg width="21" height="21" viewBox="0 0 23 23" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7.5"/><path d="m20.5 20.5-4.35-4.35"/></svg>
+      </button>
+      <a href="/pages/wishlist" class="site-header__icon site-header__icon--hide-mobile" aria-label="Wishlist">
+        <svg width="21" height="21" viewBox="0 0 23 23" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20.5s-7.5-4.6-9.9-9.3C.6 8 1.8 4.3 5.2 3.4c2-.5 4 .3 5.2 2 .5.7 1 1.4 1.6 2.1.6-.7 1.1-1.4 1.6-2.1 1.2-1.7 3.2-2.5 5.2-2 3.4.9 4.6 4.6 3.1 7.8-2.4 4.7-9.9 9.3-9.9 9.3Z"/></svg>
+      </a>
+      <a href="{{ routes.account_url }}" class="site-header__icon site-header__icon--hide-mobile" aria-label="Account">
+        <svg width="21" height="21" viewBox="0 0 23 23" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 20.5c1.4-4 4.4-6 8-6s6.6 2 8 6"/></svg>
+      </a>
+      <button type="button" class="site-header__icon" aria-label="Bag, {{ cart.item_count }} items" data-cart-icon data-cart-drawer-open>
+        <svg width="21" height="21" viewBox="0 0 23 23" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6.5 8.5h11l1 12.5h-13l1-12.5Z"/><path d="M9 8.5v-2a3 3 0 0 1 6 0v2"/></svg>
+        <span class="site-header__badge" data-cart-count>{{ cart.item_count }}</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+{% render 'cart-drawer' %}
+
+<div class="search-panel" data-search-panel aria-hidden="true">
+  <div class="search-panel__overlay" data-search-close></div>
+  <div class="search-panel__body">
+    <form action="{{ routes.search_url }}" method="get" role="search" class="search-panel__form" data-predictive-search-form>
+      <input type="search" name="q" value="" placeholder="Search products, journal, pages…" autocomplete="off" data-predictive-search-input>
+      <input type="hidden" name="type" value="product,article,page">
+      <button type="button" class="search-panel__close" data-search-close aria-label="Close search">&times;</button>
+    </form>
+    <div class="search-panel__results" data-predictive-search-results></div>
+  </div>
+</div>
+
+<div class="mobile-menu" data-mobile-menu>
+  <button class="mobile-menu__close" data-menu-close>Close</button>
+  <nav class="mobile-menu__nav">
+    {%- assign mobile_menu = linklists[section.settings.main_menu] -%}
+    {%- if mobile_menu != blank -%}
+      {%- for link in mobile_menu.links -%}
+        <a href="{{ link.url }}">{{ link.title }}</a>
+      {%- endfor -%}
+    {%- else -%}
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'nav_link' -%}
+          <a href="{{ block.settings.url }}">{{ block.settings.label }}</a>
+        {%- endif -%}
+      {%- endfor -%}
+    {%- endif -%}
+  </nav>
+</div>
+
+{% schema %}
+{
+  "name": "Header",
+  "settings": [
+    { "type": "image_picker", "id": "logo_mark", "label": "Logo mark (light, for transparent header)" },
+    { "type": "link_list", "id": "main_menu", "label": "Main menu", "default": "main-menu", "info": "Manage in Admin → Navigation. Falls back to the Nav link blocks below if not set." }
+  ],
+  "blocks": [
+    {
+      "type": "nav_link",
+      "name": "Nav link",
+      "settings": [
+        { "type": "text", "id": "label", "label": "Label", "default": "Shop" },
+        { "type": "url", "id": "url", "label": "Link" },
+        { "type": "checkbox", "id": "show_mega_nav", "label": "Show Shop mega-menu", "default": false },
+        { "type": "text", "id": "child_1_label", "label": "Dropdown item 1 label" },
+        { "type": "url", "id": "child_1_url", "label": "Dropdown item 1 link" },
+        { "type": "text", "id": "child_2_label", "label": "Dropdown item 2 label" },
+        { "type": "url", "id": "child_2_url", "label": "Dropdown item 2 link" },
+        { "type": "text", "id": "child_3_label", "label": "Dropdown item 3 label" },
+        { "type": "url", "id": "child_3_url", "label": "Dropdown item 3 link" }
+      ]
+    }
+  ],
+  "default": {
+    "blocks": [
+      { "type": "nav_link", "settings": { "label": "Shop", "url": "/collections/all" } },
+      { "type": "nav_link", "settings": { "label": "Collections", "url": "/collections", "show_mega_nav": true } },
+      { "type": "nav_link", "settings": { "label": "Women", "url": "/collections/gift-collection" } },
+      { "type": "nav_link", "settings": { "label": "Men", "url": "/collections/mens-collection" } },
+      { "type": "nav_link", "settings": { "label": "About", "url": "/pages/about" } },
+      { "type": "nav_link", "settings": { "label": "Journal", "url": "/blogs/journal" } },
+      { "type": "nav_link", "settings": { "label": "Stone Guide", "url": "/pages/stone-guide" } },
+      { "type": "nav_link", "settings": { "label": "Contact", "url": "/pages/contact" } }
+    ]
+  }
+}
+{% endschema %}

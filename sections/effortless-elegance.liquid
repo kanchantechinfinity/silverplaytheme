@@ -1,0 +1,58 @@
+<section class="heritage-sec effortless-section">
+  <img class="heritage-bg" src="{{ 'elegance-lotus.jpg' | asset_url }}" alt="" loading="lazy">
+  <div class="heritage-wash" style="background:rgba(232,216,179,0.75);"></div>
+
+  <div class="sp-container">
+    <div class="effortless-grid">
+      <div class="effortless-text">
+        <p class="eyebrow reveal">The Edit</p>
+        <h2 class="reveal">{{ section.settings.heading | default: "Effortless Elegance" }}</h2>
+        <p class="reveal">{{ section.settings.copy | default: "Perfect for women who love Indian silhouettes, celebrity inspired ethnic styling, statement silver and looks that feel graceful but not predictable." }}</p>
+        <a href="/collections/festive-wedding-collection" class="carousel-link reveal">Shop The Edit &rarr;</a>
+
+        <div class="effortless-preview reveal" data-effortless-preview>
+          {%- assign first_block = section.blocks[0] -%}
+          <img src="{{ first_block.settings.image_url }}" alt="{{ first_block.settings.title }}" loading="lazy" width="380" height="214">
+        </div>
+      </div>
+
+      <div class="effortless-thumbs reveal">
+        {%- for block in section.blocks -%}
+          <button type="button" class="effortless-thumb{% if forloop.first %} is-active{% endif %}" data-effortless-thumb data-image="{{ block.settings.image_url }}" aria-label="View {{ block.settings.title }}">
+            <img src="{{ block.settings.image_url }}" alt="{{ block.settings.title }}" loading="lazy" width="128" height="128">
+          </button>
+        {%- endfor -%}
+      </div>
+
+      <div class="effortless-video reveal">
+        <video src="{{ section.settings.video_url | default: 'https://silverplay.in/cdn/shop/videos/c/vp/c5fe9793d6c74021a90c8c9f4d48fb85/c5fe9793d6c74021a90c8c9f4d48fb85.HD-720p-3.0Mbps-88733085.mp4' }}" autoplay muted loop playsinline></video>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Effortless Elegance",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Effortless Elegance" },
+    { "type": "textarea", "id": "copy", "label": "Copy" },
+    { "type": "url", "id": "video_url", "label": "Video URL" }
+  ],
+  "blocks": [
+    { "type": "piece", "name": "Piece", "settings": [
+      { "type": "text", "id": "title", "label": "Title" },
+      { "type": "url", "id": "image_url", "label": "Image" }
+    ] }
+  ],
+  "default": {
+    "blocks": [
+      { "type": "piece", "settings": { "title": "Peridot Designer Earring", "image_url": "https://cdn.shopify.com/s/files/1/0702/4456/5101/files/sterling-silver-peridot-designer-earring-01.png?v=1786310260" } },
+      { "type": "piece", "settings": { "title": "Green Western Dangler Green Onyx Earring", "image_url": "https://cdn.shopify.com/s/files/1/0702/4456/5101/files/sterling-silver-green-western-dangler-green-onyx-earring.png?v=1786310261" } },
+      { "type": "piece", "settings": { "title": "Crimson Elara Drops Earring", "image_url": "https://cdn.shopify.com/s/files/1/0702/4456/5101/files/sterling-silver-crimson-elara-drops-earring.png?v=1786310369" } },
+      { "type": "piece", "settings": { "title": "Crimson Elegance Drops Earring", "image_url": "https://cdn.shopify.com/s/files/1/0702/4456/5101/files/sterling-silver-crimson-elegance-drops-earring-mix-of-pink-and-green.png?v=1786310372" } }
+    ]
+  },
+  "presets": [{ "name": "Effortless Elegance" }]
+}
+{% endschema %}

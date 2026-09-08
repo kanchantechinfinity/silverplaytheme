@@ -1,0 +1,26 @@
+<article class="sp-container article-page" style="padding-top:160px;padding-bottom:120px;max-width:820px;">
+  <div class="section-head reveal" style="margin-bottom:32px;">
+    <p class="eyebrow">{{ article.published_at | date: "%B %d, %Y" }}{% if article.author != blank %} &middot; {{ article.author }}{% endif %}</p>
+    <h1>{{ article.title }}</h1>
+  </div>
+
+  {%- if article.image -%}
+    <div class="article-page__hero">
+      <img src="{{ article.image | image_url: width: 1200 }}" alt="{{ article.title | escape }}" width="1200" height="700">
+    </div>
+  {%- endif -%}
+
+  <div class="article-page__content">{{ article.content }}</div>
+
+  {%- if blog.tags.size > 0 and article.tags.size > 0 -%}
+    <div class="article-page__tags">
+      {%- for tag in article.tags -%}<span class="option-pill">{{ tag }}</span>{%- endfor -%}
+    </div>
+  {%- endif -%}
+
+  <div class="article-page__back">
+    <a href="{{ blog.url }}" class="carousel-link">&larr; Back to The Journal</a>
+  </div>
+</article>
+
+{% schema %} { "name": "Article", "settings": [] } {% endschema %}

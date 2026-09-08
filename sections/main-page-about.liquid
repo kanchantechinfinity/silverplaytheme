@@ -1,0 +1,48 @@
+<section class="page-hero page-hero--tall" data-page-hero>
+  <div class="page-hero__bg">
+    <img src="{{ section.settings.hero_image | default: 'https://silverplay.in/cdn/shop/files/Screenshot_2026-05-20_at_1.11.35_PM.png?v=1779293036' }}" alt="{{ section.settings.hero_heading }}" loading="eager">
+  </div>
+  <div class="page-hero__content">
+    <p class="eyebrow" style="color:var(--sp-ash-3);">{{ section.settings.hero_eyebrow | default: "Our Story" }}</p>
+    <h1 class="reveal">{{ section.settings.hero_heading | default: "The Soul of Indian Silver" }}</h1>
+
+    <div class="page-hero__badges">
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'badge' -%}
+          <div class="page-hero__badge reveal">
+            <p class="glyph" aria-hidden="true">{{ block.settings.glyph }}</p>
+            <p class="label">{{ block.settings.label }}</p>
+            <p class="sub">{{ block.settings.sub }}</p>
+          </div>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "About hero",
+  "settings": [
+    { "type": "text", "id": "hero_eyebrow", "label": "Eyebrow", "default": "Our Story" },
+    { "type": "text", "id": "hero_heading", "label": "Heading", "default": "The Soul of Indian Silver" },
+    { "type": "url", "id": "hero_image", "label": "Hero image" }
+  ],
+  "blocks": [
+    { "type": "badge", "name": "Badge", "settings": [
+      { "type": "text", "id": "glyph", "label": "Glyph", "default": "✿" },
+      { "type": "text", "id": "label", "label": "Label", "default": "925" },
+      { "type": "text", "id": "sub", "label": "Sub-label", "default": "Sterling Silver" }
+    ] }
+  ],
+  "default": {
+    "blocks": [
+      { "type": "badge", "settings": { "glyph": "✿", "label": "925", "sub": "Sterling Silver" } },
+      { "type": "badge", "settings": { "glyph": "◈", "label": "Handcrafted", "sub": "By Skilled Karigars" } },
+      { "type": "badge", "settings": { "glyph": "❖", "label": "Stone-Led", "sub": "Jewellery" } },
+      { "type": "badge", "settings": { "glyph": "✦", "label": "Gift-Ready", "sub": "Premium Packaging" } }
+    ]
+  },
+  "presets": [{ "name": "About hero" }]
+}
+{% endschema %}

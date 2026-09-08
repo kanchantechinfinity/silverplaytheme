@@ -1,0 +1,51 @@
+{% comment %} Ajax cart drawer — add/remove/update without a page reload via /cart/change.js. {% endcomment %}
+<div class="cart-drawer" data-cart-drawer aria-hidden="true">
+  <div class="cart-drawer__overlay" data-cart-drawer-close></div>
+  <div class="cart-drawer__panel" role="dialog" aria-label="Your bag">
+    <div class="cart-drawer__head">
+      <h2>Your Bag</h2>
+      <button type="button" class="cart-drawer__close" data-cart-drawer-close aria-label="Close bag">&times;</button>
+    </div>
+
+    <div class="cart-drawer__body" data-cart-drawer-body>
+      {% comment %} Populated client-side from /cart.js — see assets/theme.js renderCartDrawer {% endcomment %}
+    </div>
+
+    <div class="cart-drawer__foot" data-cart-drawer-foot>
+      <div class="cart-drawer__subtotal">
+        <span>Subtotal</span>
+        <span data-cart-drawer-subtotal>{{ cart.total_price | money }}</span>
+      </div>
+      <a href="{{ routes.cart_url }}" class="btn btn--outline" style="color:var(--sp-ink);border-color:var(--sp-line);width:100%;justify-content:center;">View Bag</a>
+      <a href="{{ routes.cart_url }}/checkout" class="btn btn--ink" style="width:100%;justify-content:center;margin-top:10px;">Checkout</a>
+    </div>
+  </div>
+</div>
+
+<template data-cart-drawer-empty-template>
+  <div class="cart-drawer__empty">
+    <p>Your bag is empty.</p>
+    <a href="{{ routes.all_products_collection_url }}" class="btn btn--ink">Continue Shopping</a>
+  </div>
+</template>
+
+<template data-cart-drawer-line-template>
+  <div class="cart-line" data-cart-line data-key="">
+    <a class="cart-line__image" href="" data-cart-line-url>
+      <img src="" alt="" width="96" height="120" data-cart-line-image>
+    </a>
+    <div class="cart-line__body">
+      <a href="" class="cart-line__title" data-cart-line-url data-cart-line-title></a>
+      <p class="cart-line__variant" data-cart-line-variant></p>
+      <div class="cart-line__row">
+        <div class="qty-stepper">
+          <button type="button" data-cart-line-decrease aria-label="Decrease quantity">&minus;</button>
+          <span data-cart-line-qty></span>
+          <button type="button" data-cart-line-increase aria-label="Increase quantity">&plus;</button>
+        </div>
+        <span class="cart-line__price" data-cart-line-price></span>
+      </div>
+      <button type="button" class="cart-line__remove" data-cart-line-remove>Remove</button>
+    </div>
+  </div>
+</template>

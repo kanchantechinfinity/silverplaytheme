@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="{{ request.locale.iso_code }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>{{ page_title | default: "Silver Play — Think Silver. Think Silver Play" }}</title>
+  <meta name="description" content="{{ page_description | default: 'Handcrafted sterling silver jewellery, forged for the woman who wears her story. 925 BIS-certified, artisan crafted in India.' | escape }}">
+
+  <link rel="canonical" href="{{ canonical_url }}">
+  {{ content_for_header }}
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Cinzel+Decorative:wght@400;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500;1,600&family=Tiro+Devanagari+Hindi&display=swap">
+
+  {{ 'theme.css' | asset_url | stylesheet_tag }}
+  <link rel="icon" href="{{ 'favicon.ico' | asset_url }}">
+</head>
+<body class="template-{{ template.name }}">
+
+  {% section 'header' %}
+
+  <main>
+    {{ content_for_layout }}
+  </main>
+
+  {% section 'footer' %}
+
+  <script>window.Shopify = window.Shopify || {}; window.Shopify.money_format = {{ shop.money_format | json }};</script>
+  {{ 'theme.js' | asset_url | script_tag }}
+</body>
+</html>

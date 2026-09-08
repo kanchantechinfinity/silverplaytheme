@@ -1,0 +1,111 @@
+<div class="sp-container product-page" style="padding-top:160px;padding-bottom:120px;" data-product-page data-product-handle="{{ product.handle }}" data-product-url="{{ product.url }}">
+  <div class="product-page__grid">
+    <div class="product-page__gallery">
+      <div class="product-page__main-image" data-product-main-image>
+        {%- if product.featured_media -%}
+          <img src="{{ product.featured_media | image_url: width: 900 }}" alt="{{ product.featured_media.alt | escape }}" width="900" height="1125" id="ProductMainImage">
+        {%- else -%}
+          <img src="{{ 'product-placeholder' | placeholder_svg_tag }}" alt="{{ product.title | escape }}">
+        {%- endif -%}
+      </div>
+      {%- if product.media.size > 1 -%}
+        <div class="product-page__thumbs">
+          {%- for media in product.media -%}
+            <button type="button" class="product-page__thumb{% if forloop.first %} is-active{% endif %}" data-product-thumb data-full-src="{{ media | image_url: width: 900 }}">
+              <img src="{{ media | image_url: width: 160 }}" alt="{{ media.alt | escape }}" width="80" height="100">
+            </button>
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+    </div>
+
+    <div class="product-page__info reveal">
+      <p class="eyebrow">{{ product.vendor | default: shop.name }}</p>
+      <h1>{{ product.title }}</h1>
+
+      <p class="product-page__price" data-product-price>
+        {{ product.selected_or_first_available_variant.price | money }}
+        {%- if product.selected_or_first_available_variant.compare_at_price > product.selected_or_first_available_variant.price -%}
+          <span class="product-card__compare">{{ product.selected_or_first_available_variant.compare_at_price | money }}</span>
+        {%- endif -%}
+      </p>
+
+      <p class="product-page__availability" data-product-availability>
+        {%- if product.selected_or_first_available_variant.available -%}In Stock{%- else -%}Sold Out{%- endif -%}
+      </p>
+
+      {% form 'product', product, data-product-form: true %}
+        <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}" data-product-variant-id>
+
+        {%- unless product.has_only_default_variant -%}
+          {%- for option in product.options_with_values -%}
+            <div class="product-page__option" data-product-option data-option-position="{{ forloop.index }}">
+              <p class="product-page__option-label">{{ option.name }}</p>
+              <div class="product-page__option-values">
+                {%- for value in option.values -%}
+                  <button type="button"
+                    class="option-pill{% if value == option.selected_value %} is-active{% endif %}"
+                    data-option-value="{{ value | escape }}">{{ value }}</button>
+                {%- endfor -%}
+              </div>
+            </div>
+          {%- endfor -%}
+        {%- endunless -%}
+
+        <div class="product-page__qty-row">
+          <div class="qty-stepper" data-product-qty-stepper>
+            <button type="button" data-qty-decrease aria-label="Decrease quantity">&minus;</button>
+            <input type="number" name="quantity" value="1" min="1" data-qty-input>
+            <button type="button" data-qty-increase aria-label="Increase quantity">&plus;</button>
+          </div>
+          <button type="submit" class="btn btn--ink product-page__add-to-cart" data-product-add-to-cart
+            {%- unless product.selected_or_first_available_variant.available %} disabled{% endunless %}>
+            <span data-add-to-cart-text>
+              {%- if product.selected_or_first_available_variant.available -%}Add To Bag{%- else -%}Sold Out{%- endif -%}
+            </span>
+          </button>
+        </div>
+
+        <p class="product-page__form-message" data-product-form-message role="status"></p>
+      {% endform %}
+
+      <script type="application/json" data-product-variants-json>{{ product.variants | json }}</script>
+      <script type="application/json" data-product-options-json>{{ product.options_with_values | json }}</script>
+
+      {%- if product.description != blank -%}
+        <div class="product-page__description">{{ product.description }}</div>
+      {%- endif -%}
+    </div>
+  </div>
+
+  {%- assign related_collection = collections[section.settings.related_collection] -%}
+  <div class="product-page__related" data-product-recommendations data-url="{{ routes.product_recommendations_url }}?section_id={{ section.id }}&product_id={{ product.id }}&limit={{ section.settings.related_count }}&intent=related">
+    <div class="section-head reveal">
+      <p class="eyebrow">You May Also Love</p>
+      <h2>Complete The Look</h2>
+    </div>
+    <div class="product-grid" data-product-recommendations-grid>
+      {%- if recommendations.performed and recommendations.products_count > 0 -%}
+        {%- for related in recommendations.products -%}
+          {% render 'product-card', product: related %}
+        {%- endfor -%}
+      {%- elsif related_collection != blank -%}
+        {%- for related in related_collection.products limit: section.settings.related_count -%}
+          {%- unless related.id == product.id -%}
+            {% render 'product-card', product: related %}
+          {%- endunless -%}
+        {%- endfor -%}
+      {%- endif -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Product",
+  "settings": [
+    { "type": "collection", "id": "related_collection", "label": "Related products fallback collection", "info": "Used only if live product recommendations return nothing." },
+    { "type": "range", "id": "related_count", "label": "Related products to show", "min": 4, "max": 8, "step": 1, "default": 4 }
+  ]
+}
+{% endschema %}

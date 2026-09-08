@@ -1,0 +1,42 @@
+<div class="kavach-outer" style="padding-top:96px;padding-bottom:96px;">
+  <div class="heritage-sec kavach-card">
+    <img class="heritage-bg" src="{{ 'vanity-mood.jpg' | asset_url }}" alt="" loading="lazy">
+    <div class="heritage-wash" style="background:linear-gradient(to right, var(--sp-ink), rgba(36,26,16,0.85), rgba(36,26,16,0.55));"></div>
+
+    <div class="kavach-card__text reveal">
+      <p class="eyebrow">The Edit</p>
+      <h3>{{ section.settings.heading | default: "Kavach" }}</h3>
+      <p>{{ section.settings.copy | default: "Earthy stones for strength, grounding, courage and quiet power — Tiger Eye, Blood Stone, Black Banded Agate and more, set in 925 sterling silver as a protective piece worn close." }}</p>
+      <a href="{{ coll.url | default: '/collections/kavach' }}" class="kavach-card__link">Shop The Edit &rarr;</a>
+    </div>
+
+    <div class="kavach-track-wrap" data-drag-scroll>
+      <div class="kavach-track">
+        {%- assign coll = collections[section.settings.collection] -%}
+        {%- if coll != blank -%}
+          {%- for product in coll.products limit: section.settings.count -%}
+            <a href="{{ product.url }}" class="kavach-item">
+              <span class="kavach-item__circle">
+                <img src="{{ product.featured_image | image_url: width: 144 }}" alt="{{ product.title | escape }}" loading="lazy" width="144" height="144">
+              </span>
+              <span class="kavach-item__label">{{ product.title | truncate: 24 }}</span>
+            </a>
+          {%- endfor -%}
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Cool Girl Silver (Kavach)",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Kavach" },
+    { "type": "textarea", "id": "copy", "label": "Copy", "default": "Earthy stones for strength, grounding, courage and quiet power — Tiger Eye, Blood Stone, Black Banded Agate and more, set in 925 sterling silver as a protective piece worn close." },
+    { "type": "collection", "id": "collection", "label": "Collection" },
+    { "type": "range", "id": "count", "label": "Products to show", "min": 4, "max": 16, "step": 1, "default": 8 }
+  ],
+  "presets": [{ "name": "Cool Girl Silver (Kavach)" }]
+}
+{% endschema %}

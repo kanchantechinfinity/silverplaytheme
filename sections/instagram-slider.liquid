@@ -1,0 +1,51 @@
+<section class="insta-section">
+  <div class="sp-container">
+    <div class="insta-head">
+      <div>
+        <p class="eyebrow reveal">As Seen &amp; Loved</p>
+        <h2 class="reveal">@thesilverplay</h2>
+      </div>
+      <a href="https://www.instagram.com/thesilverplay/" target="_blank" rel="noopener noreferrer" class="insta-follow reveal">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2.5" y="2.5" width="19" height="19" rx="5.5"/><circle cx="12" cy="12" r="4.3"/><circle cx="17.4" cy="6.6" r="0.9" fill="currentColor" stroke="none"/></svg>
+        Follow on Instagram
+      </a>
+    </div>
+
+    <div class="insta-track-wrap" data-drag-scroll>
+      <div class="insta-track">
+        {%- for block in section.blocks -%}
+          <a href="https://www.instagram.com/thesilverplay/" target="_blank" rel="noopener noreferrer" class="insta-item">
+            <div class="insta-item__photo">
+              <img src="{{ block.settings.image_url }}" alt="{{ block.settings.title }}" loading="lazy" width="256" height="256">
+            </div>
+          </a>
+        {%- endfor -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Instagram Slider",
+  "blocks": [
+    { "type": "photo", "name": "Photo", "settings": [
+      { "type": "text", "id": "title", "label": "Title" },
+      { "type": "url", "id": "image_url", "label": "Image" }
+    ] }
+  ],
+  "default": {
+    "blocks": [
+      { "type": "photo", "settings": { "title": "Silver Cascade Chains Earring", "image_url": "https://cdn.shopify.com/s/files/1/0702/4456/5101/files/sterling-silver-cascade-chains-earring.png?v=1786310334" } },
+      { "type": "photo", "settings": { "title": "Designer Monarch Elegance Drop Earring", "image_url": "https://cdn.shopify.com/s/files/1/0702/4456/5101/files/sterling-silver-designer-monarch-elegance-drop-earring.png?v=1786310352" } },
+      { "type": "photo", "settings": { "title": "Royal Medallion Pyrite Pendant", "image_url": "https://cdn.shopify.com/s/files/1/0702/4456/5101/files/SterlingSilverRoyalMedallionPyritePendant.png?v=1787114961" } },
+      { "type": "photo", "settings": { "title": "Floral Radiance Indo Western Earring", "image_url": "https://cdn.shopify.com/s/files/1/0702/4456/5101/files/sterling-silver-floral-radiance-indo-western-earring.png?v=1786310330" } },
+      { "type": "photo", "settings": { "title": "Peacock Kundan Jhumka Earrings", "image_url": "https://cdn.shopify.com/s/files/1/0702/4456/5101/files/sterling-silver-peacock-kundan-jhumka-earrings-01.png?v=1785840641" } },
+      { "type": "photo", "settings": { "title": "Heritage Anarkali Rani Style Earring", "image_url": "https://cdn.shopify.com/s/files/1/0702/4456/5101/files/sterling-silver-heritage-anarkali-rani-style-earring-with-self-antique-design.png?v=1786310368" } },
+      { "type": "photo", "settings": { "title": "Divine Lakshmi Pyrite Pendant", "image_url": "https://cdn.shopify.com/s/files/1/0702/4456/5101/files/LaxmiPendant.png?v=1786971061" } },
+      { "type": "photo", "settings": { "title": "Gothic Spider Drop Earrings", "image_url": "https://cdn.shopify.com/s/files/1/0702/4456/5101/files/sterling-silver-gothic-spider-drop-earrings-01.png?v=1785840648" } }
+    ]
+  },
+  "presets": [{ "name": "Instagram Slider" }]
+}
+{% endschema %}

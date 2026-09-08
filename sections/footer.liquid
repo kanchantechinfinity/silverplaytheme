@@ -1,0 +1,83 @@
+<footer class="site-footer grain">
+  <div class="sp-container sp-container--narrow">
+    <div class="footer-grid">
+      <div class="footer-brand reveal">
+        <img src="https://silverplay.in/cdn/shop/files/SP_WHite_log_SHort.png" alt="{{ shop.name }}" width="200" height="200" loading="lazy">
+        <p>{{ section.settings.footer_statement | default: "Handcrafted sterling silver jewellery, forged in the ancient tradition" }}</p>
+        <div class="footer-social">
+          <a href="https://www.instagram.com/thesilverplay/" target="_blank" rel="noopener noreferrer">Instagram</a>
+          <a href="https://facebook.com/thesilverplay" target="_blank" rel="noopener noreferrer">Facebook</a>
+        </div>
+      </div>
+
+      <div class="footer-col reveal">
+        <h4 class="eyebrow">{{ section.settings.col1_title | default: "Explore" }}</h4>
+        <ul>
+          {%- assign col1_menu = linklists[section.settings.col1_menu] -%}
+          {%- if col1_menu != blank -%}
+            {%- for link in col1_menu.links -%}<li><a href="{{ link.url }}">{{ link.title }}</a></li>{%- endfor -%}
+          {%- else -%}
+            <li><a href="/collections/gift-collection">All Jewellery</a></li>
+            <li><a href="/collections/earrings">Earrings</a></li>
+            <li><a href="/collections/pendants">Pendants</a></li>
+            <li><a href="/blogs/journal">Journal</a></li>
+          {%- endif -%}
+        </ul>
+      </div>
+
+      <div class="footer-col reveal">
+        <h4 class="eyebrow">{{ section.settings.col2_title | default: "Care & Policy" }}</h4>
+        <ul>
+          {%- assign col2_menu = linklists[section.settings.col2_menu] -%}
+          {%- if col2_menu != blank -%}
+            {%- for link in col2_menu.links -%}<li><a href="{{ link.url }}">{{ link.title }}</a></li>{%- endfor -%}
+          {%- else -%}
+            <li><a href="/pages/jewellery-care">Jewellery Care</a></li>
+            <li><a href="/pages/shipping-policy">Shipping Policy</a></li>
+            <li><a href="/pages/returns">Returns &amp; Refunds</a></li>
+            <li><a href="/pages/faqs">FAQs</a></li>
+            <li><a href="/pages/privacy">Privacy Policy</a></li>
+            <li><a href="/pages/terms">Terms of Service</a></li>
+          {%- endif -%}
+        </ul>
+      </div>
+
+      <div class="footer-col reveal">
+        <h4 class="eyebrow">{{ section.settings.col3_title | default: "Connect" }}</h4>
+        <ul>
+          {%- assign col3_menu = linklists[section.settings.col3_menu] -%}
+          {%- if col3_menu != blank -%}
+            {%- for link in col3_menu.links -%}<li><a href="{{ link.url }}">{{ link.title }}</a></li>{%- endfor -%}
+          {%- else -%}
+            <li><a href="/pages/contact">Contact Us</a></li>
+            <li><a href="/pages/about">Our Story</a></li>
+          {%- endif -%}
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-rule"></div>
+
+    <div class="footer-bottom">
+      <p class="copyright">{{ section.settings.copyright | default: "© 2026 Silver Play. All rights reserved. Crafted with devotion in India." }}</p>
+      <p class="curator">{{ section.settings.curator | default: "Curated By Dalljiet Kaur" }}</p>
+    </div>
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "Footer",
+  "settings": [
+    { "type": "text", "id": "footer_statement", "label": "Footer statement", "default": "Handcrafted sterling silver jewellery, forged in the ancient tradition" },
+    { "type": "text", "id": "copyright", "label": "Copyright line", "default": "© 2026 Silver Play. All rights reserved. Crafted with devotion in India." },
+    { "type": "text", "id": "curator", "label": "Curator line", "default": "Curated By Dalljiet Kaur" },
+    { "type": "text", "id": "col1_title", "label": "Column 1 title", "default": "Explore" },
+    { "type": "link_list", "id": "col1_menu", "label": "Column 1 menu" },
+    { "type": "text", "id": "col2_title", "label": "Column 2 title", "default": "Care & Policy" },
+    { "type": "link_list", "id": "col2_menu", "label": "Column 2 menu" },
+    { "type": "text", "id": "col3_title", "label": "Column 3 title", "default": "Connect" },
+    { "type": "link_list", "id": "col3_menu", "label": "Column 3 menu" }
+  ]
+}
+{% endschema %}

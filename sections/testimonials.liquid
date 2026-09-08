@@ -1,0 +1,66 @@
+<section class="testimonial-section">
+  <div class="section-head reveal">
+    <p class="eyebrow" style="color:#c9a879;">In Her Own Words</p>
+    <h2>Notes We Keep</h2>
+  </div>
+
+  <div class="rope-wrap">
+    <svg class="rope-svg" viewBox="0 0 100 64" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M 0,20 Q 50,54 100,20" fill="none" stroke="#4a3618" stroke-width="3.2" stroke-linecap="round" vector-effect="non-scaling-stroke"/>
+      <path d="M 0,20 Q 50,54 100,20" fill="none" stroke="#a4813f" stroke-width="1.4" stroke-dasharray="2.2 2.6" stroke-linecap="round" opacity="0.85" vector-effect="non-scaling-stroke"/>
+    </svg>
+
+    <div class="clothesline">
+      {%- for block in section.blocks -%}
+        {%- assign n = section.blocks.size | minus: 1 -%}
+        {%- if n > 0 -%}{%- assign t = forloop.index0 | times: 1.0 | divided_by: n -%}{%- else -%}{%- assign t = 0.5 -%}{%- endif -%}
+        <div class="hanging-card">
+          <span class="hanging-card__thread"></span>
+          <span class="hanging-card__knot"></span>
+          <div class="hanging-card__swing" style="animation-duration: {{ 4.6 | plus: forloop.index0 | modulo: 3 }}s;">
+            <button type="button" class="voice-card" data-voice-card data-quote="{{ block.settings.quote | escape }}" data-attribution="{{ block.settings.attribution | escape }}" aria-label="Read the full note: {{ block.settings.attribution }}">
+              <div class="voice-card__paper">
+                <span class="flourish">&#10087;</span>
+                <p class="quote">&ldquo;{{ block.settings.quote }}&rdquo;</p>
+                <p class="attribution">{{ block.settings.attribution }}</p>
+              </div>
+            </button>
+          </div>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+
+  <div class="voice-overlay" data-voice-overlay style="display:none; position:fixed; inset:0; align-items:center; justify-content:center; padding:24px; background:rgba(36,26,16,0.85); z-index:700; backdrop-filter:blur(4px);">
+    <div data-voice-overlay-paper class="voice-card" style="width:100%; max-width:420px; box-shadow:0 40px 90px -30px rgba(0,0,0,0.7);">
+      <div class="voice-card__paper" style="padding:48px 36px;">
+        <span class="flourish" style="font-size:1.5rem;">&#10087;</span>
+        <p class="quote" data-voice-quote style="font-size:1.7rem;"></p>
+        <p class="attribution" data-voice-attribution></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Testimonials",
+  "blocks": [
+    { "type": "voice", "name": "Voice", "settings": [
+      { "type": "textarea", "id": "quote", "label": "Quote" },
+      { "type": "text", "id": "attribution", "label": "Attribution" }
+    ] }
+  ],
+  "default": {
+    "blocks": [
+      { "type": "voice", "settings": { "quote": "Handcrafted sterling silver jewellery, forged for the woman who wears her story.", "attribution": "Silver Play" } },
+      { "type": "voice", "settings": { "quote": "Every piece is made with a belief that you deserve beautiful things around you.", "attribution": "Dalljiet Kaur, Founder" } },
+      { "type": "voice", "settings": { "quote": "A single pendant can pass through five pairs of hands before it reaches yours.", "attribution": "Inside the Jaipur Atelier" } },
+      { "type": "voice", "settings": { "quote": "Jewellery can be more than beautiful — it can be intentional.", "attribution": "How to Wear Meaning" } },
+      { "type": "voice", "settings": { "quote": "With proper care, your Silver Play pieces will last a lifetime.", "attribution": "Jewellery Care" } },
+      { "type": "voice", "settings": { "quote": "Handcrafted sterling silver jewellery, forged in the ancient tradition.", "attribution": "Silver Play" } }
+    ]
+  },
+  "presets": [{ "name": "Testimonials" }]
+}
+{% endschema %}

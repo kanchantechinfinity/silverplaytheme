@@ -1,0 +1,76 @@
+<section class="heritage-sec occasion-section">
+  <div class="heritage-wallpaper" style="color:var(--sp-bone-3); opacity:0.04;"></div>
+
+  <div class="occasion-layout">
+    <div class="occasion-heading reveal">
+      <p class="eyebrow">Dressed For The Moment</p>
+      <a href="/collections" class="btn btn--outline">Shop Now</a>
+      <h2>Shop By<br>Occasion</h2>
+    </div>
+
+    <div class="occasion-bento">
+      <div class="occasion-col">
+        <div class="grow-1-5 reveal">
+          {%- assign o = section.blocks[0] -%}
+          <a href="{{ o.settings.collection_url }}" class="occasion-card">
+            <img src="{{ o.settings.image_url }}" alt="{{ o.settings.title }}" loading="lazy" width="480" height="600">
+            <div class="occasion-card__wash"></div>
+            <div class="occasion-card__row"><p>{{ o.settings.title }}</p><span class="occasion-card__go">&rarr;</span></div>
+          </a>
+        </div>
+        <div class="grow-1 reveal">
+          {%- assign o = section.blocks[1] -%}
+          <a href="{{ o.settings.collection_url }}" class="occasion-card">
+            <img src="{{ o.settings.image_url }}" alt="{{ o.settings.title }}" loading="lazy" width="480" height="360">
+            <div class="occasion-card__wash"></div>
+            <div class="occasion-card__row"><p>{{ o.settings.title }}</p><span class="occasion-card__go">&rarr;</span></div>
+          </a>
+        </div>
+      </div>
+      <div class="occasion-col">
+        <div class="grow-1 reveal">
+          {%- assign o = section.blocks[2] -%}
+          <a href="{{ o.settings.collection_url }}" class="occasion-card">
+            <img src="{{ o.settings.image_url }}" alt="{{ o.settings.title }}" loading="lazy" width="480" height="360">
+            <div class="occasion-card__wash"></div>
+            <div class="occasion-card__row"><p>{{ o.settings.title }}</p><span class="occasion-card__go">&rarr;</span></div>
+          </a>
+        </div>
+        <div class="grow-1-3 reveal">
+          {%- assign o = section.blocks[3] -%}
+          <a href="{{ o.settings.collection_url }}" class="occasion-card">
+            <img src="{{ o.settings.image_url }}" alt="{{ o.settings.title }}" loading="lazy" width="480" height="600">
+            <div class="occasion-card__wash"></div>
+            <div class="occasion-card__row"><p>{{ o.settings.title }}</p><span class="occasion-card__go">&rarr;</span></div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Shop By Occasion",
+  "blocks": [
+    {
+      "type": "occasion",
+      "name": "Occasion",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Title" },
+        { "type": "url", "id": "collection_url", "label": "Collection link" },
+        { "type": "url", "id": "image_url", "label": "Image" }
+      ]
+    }
+  ],
+  "default": {
+    "blocks": [
+      { "type": "occasion", "settings": { "title": "Bali Collection", "collection_url": "/collections/baali-collection", "image_url": "https://silverplay.in/cdn/shop/files/SterlingSilverGlimmerSevenBeadHoops.png?v=1778141554" } },
+      { "type": "occasion", "settings": { "title": "Party Wear", "collection_url": "/collections/party-wear", "image_url": "https://silverplay.in/cdn/shop/files/sterling-silver-rough-aqua-marine-party-earring.png?v=1786310319" } },
+      { "type": "occasion", "settings": { "title": "Office Muse", "collection_url": "/collections/office-muse", "image_url": "https://silverplay.in/cdn/shop/files/SterlingSilverDewDropsPartyWearEarrings.png?v=1777716865" } },
+      { "type": "occasion", "settings": { "title": "Everyday Elegance", "collection_url": "/collections/everyday-elegance", "image_url": "https://silverplay.in/cdn/shop/files/SterlingSilverGaneshTempleHeritageEarring_Jhumka_2.png?v=1779279620" } }
+    ]
+  },
+  "presets": [{ "name": "Shop By Occasion" }]
+}
+{% endschema %}

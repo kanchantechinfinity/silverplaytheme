@@ -1,0 +1,47 @@
+<section class="heritage-sec journal-section" data-carousel>
+  <img class="heritage-bg" src="{{ 'story-veena.jpg' | asset_url }}" alt="" loading="lazy">
+  <div class="heritage-wash" style="background:rgba(242,232,208,0.8);"></div>
+
+  <div class="journal-head reveal">
+    <p class="eyebrow">From The Journal</p>
+    <h2>{{ section.settings.heading | default: "Stories, Worn as Silver" }}</h2>
+  </div>
+
+  {%- assign journal_blog = blogs[section.settings.blog] -%}
+  <div class="journal-track-wrap">
+    <div class="journal-track" data-carousel-track>
+      {%- if journal_blog != blank -%}
+        {%- for article in journal_blog.articles limit: section.settings.count -%}
+          <a href="{{ article.url }}" class="journal-card">
+            {%- if article.image -%}
+              <img src="{{ article.image | image_url: width: 620 }}" alt="{{ article.title | escape }}" loading="lazy" width="620" height="480">
+            {%- endif -%}
+            <div class="journal-card__wash"></div>
+            <div class="journal-card__row">
+              <h3>{{ article.title }}</h3>
+              <span class="journal-card__go">&rarr;</span>
+            </div>
+          </a>
+        {%- endfor -%}
+      {%- endif -%}
+    </div>
+  </div>
+
+  <div class="journal-controls">
+    <button type="button" class="carousel-arrow" data-carousel-prev aria-label="Previous story">&larr;</button>
+    <button type="button" class="carousel-arrow carousel-arrow--solid" data-carousel-next aria-label="Next story">&rarr;</button>
+    <a href="{{ journal_blog.url | default: '/blogs/journal' }}" class="carousel-link">Read The Journal &rarr;</a>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Journal Showcase",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Stories, Worn as Silver" },
+    { "type": "text", "id": "blog", "label": "Blog handle", "default": "journal", "info": "Handle of the blog to pull articles from (Admin → Online Store → Blog posts)." },
+    { "type": "range", "id": "count", "label": "Articles to show", "min": 2, "max": 8, "step": 1, "default": 4 }
+  ],
+  "presets": [{ "name": "Journal Showcase" }]
+}
+{% endschema %}

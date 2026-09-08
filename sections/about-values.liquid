@@ -1,0 +1,28 @@
+<section class="split-row split-row--bone-2">
+  <div class="sp-container">
+    <div class="split-row__grid split-row--reverse">
+      <div class="split-row__media reveal">
+        <img src="{{ section.settings.image | default: 'https://silverplay.in/cdn/shop/files/Rajsi_SP_Website_41ccae1d-7e58-4695-b942-459bc0411093_800x1200_crop_center.png?v=1781610360' }}" alt="{{ section.settings.heading }}" loading="lazy">
+      </div>
+      <div class="split-row__text reveal">
+        <p class="eyebrow">{{ section.settings.eyebrow | default: "What We Stand For" }}</p>
+        <h2>{{ section.settings.heading | default: "Slow Making, Honest Materials" }}</h2>
+        <p class="split-row__flourish" aria-hidden="true">&#10087;</p>
+        <p>{{ section.settings.paragraph | default: "We are an independent Indian jewellery brand. We believe in slow making over mass production, in natural over synthetic, in stories over trends. We take pride in being transparent about what goes into each piece — the metal grade, the stone type, the craft involved. When you wear a Silver Play piece, you are wearing a moment of craft: a connection between the person who made it, the stone that was chosen, and you. We ship from India to jewellery lovers around the world, and we welcome questions, custom conversations, and customers who want to know what they are wearing and why it matters. Thank you for being here." }}</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "About values row",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "What We Stand For" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Slow Making, Honest Materials" },
+    { "type": "textarea", "id": "paragraph", "label": "Paragraph" },
+    { "type": "url", "id": "image", "label": "Image" }
+  ],
+  "presets": [{ "name": "About values row" }]
+}
+{% endschema %}
