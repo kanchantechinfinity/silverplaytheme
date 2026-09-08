@@ -105,12 +105,41 @@ of falling back to the generic rich-text `page.json` template:
   `mailto:`-only form, this one actually delivers messages to the store's
   Contact notification recipient.
 
+- **FAQs** — `templates/page.faqs.json` +
+  `sections/main-page-faqs.liquid`: a banner header (same `page-hero`
+  pattern as About/Stone Guide/Contact) followed by the full click-to-expand
+  FAQ accordion (reuses the existing `.faq-list`/`.faq-row` markup and
+  `initFaq()` behavior from `assets/theme.js`/`sections/faq.liquid`), driven
+  by `faq_item` blocks (question/answer text + an optional accent image) so
+  the merchant can add/remove/reorder questions in the theme editor. Ships
+  pre-populated with the same 4 real FAQ entries used in `src/data/site.ts`
+  `faqs` / `src/components/sections/FAQ.tsx` (delivery, returns, care,
+  "why sterling silver") as the template's default blocks.
+- **Jewellery Care** — `templates/page.jewellery-care.json` +
+  `sections/main-page-jewellery-care.liquid`: banner header, a 3-card
+  "Everyday Care" row (`care_step` blocks) and a 4-card "What's In Every
+  Box" row (`box_item` blocks), reusing the existing `gold-card`/
+  `vision-grid` styling. Content is real, sourced verbatim/near-verbatim
+  from `src/components/product/ProductInfoAccordion.tsx` ("Care
+  Instructions": store in the anti-tarnish pouch, avoid perfume/lotion/
+  water, wipe with a soft cloth, use a polishing cloth for deeper
+  cleaning) and `src/components/product/ProductBoxContents.tsx` (BIS
+  Hallmark Certificate, Anti-Tarnish Pouch, Silver Polishing Cloth, the
+  piece itself) — the same box/care copy already used sitewide, just
+  reorganized into a standalone guide. No invented claims were added.
+
 **To select a dedicated template in Admin:** Online Store → Pages → open
 the page (or create one) → in the right-hand sidebar under *Theme
-template*, choose `page.about-us`, `page.stone-guide` or `page.contact`
-from the dropdown (Shopify lists `templates/page.<suffix>.json` files by
-their `<suffix>`) → Save. Any page without an explicit template still falls
-back to the generic `page.json`.
+template*, choose `page.about-us`, `page.stone-guide`, `page.contact`,
+`page.faqs` or `page.jewellery-care` from the dropdown (Shopify lists
+`templates/page.<suffix>.json` files by their `<suffix>`) → Save. Any page
+without an explicit template still falls back to the generic `page.json`.
+
+**Shipping / Returns / Privacy / Terms:** the original Next.js site has no
+unique design for these — use Shopify's native **Settings → Policies**
+(auto-generates Shipping/Refund/Privacy/Terms pages and links them from
+checkout) rather than a bespoke template, or fall back to the generic
+`page.json` template if you'd rather manage them as regular pages.
 - **Blog / Article** — `templates/blog.json` + `templates/article.json` with
   `sections/main-blog.liquid` (card grid, same visual language as the home
   Journal cards, paginated) and `sections/main-article.liquid` (hero image,

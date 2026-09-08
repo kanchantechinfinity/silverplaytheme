@@ -1,0 +1,77 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-page-jewellery-care",
+      "settings": {
+        "eyebrow": "Care Guide",
+        "heading": "Caring for Your Silver",
+        "description": "Every Silver Play piece is handcrafted in 925 sterling silver — 92.5% pure silver and 7.5% other metals for strength, stamped '925' on every piece. With a little care, it will last a lifetime.",
+        "hero_image": "https://silverplay.in/cdn/shop/files/SP_Website_Banners_10_800x1200_crop_center.png?v=1783577220",
+        "steps_eyebrow": "Everyday Care",
+        "steps_heading": "Three Simple Habits",
+        "box_eyebrow": "Unboxing",
+        "box_heading": "What's In Every Box"
+      },
+      "blocks": {
+        "step-1": {
+          "type": "care_step",
+          "settings": {
+            "glyph": "◈",
+            "title": "Store It Right",
+            "body": "Store in the anti-tarnish pouch provided — airtight storage that keeps the shine for years. Keep pieces separate so they don't scratch each other."
+          }
+        },
+        "step-2": {
+          "type": "care_step",
+          "settings": {
+            "glyph": "✿",
+            "title": "Keep It Dry",
+            "body": "Avoid contact with perfume, lotions and water. Put your jewellery on last, after other products have dried, and take it off before you shower or swim."
+          }
+        },
+        "step-3": {
+          "type": "care_step",
+          "settings": {
+            "glyph": "❖",
+            "title": "Clean It Gently",
+            "body": "Wipe gently with a soft cloth after wearing. For deeper cleaning, use a mild silver polishing cloth — the same one that ships in your box."
+          }
+        },
+        "box-1": {
+          "type": "box_item",
+          "settings": {
+            "glyph": "✦",
+            "title": "BIS Hallmark Certificate",
+            "body": "A digital QR card verifying purity and provenance for every piece."
+          }
+        },
+        "box-2": {
+          "type": "box_item",
+          "settings": {
+            "glyph": "◈",
+            "title": "Anti-Tarnish Pouch",
+            "body": "Airtight storage that keeps the shine for years."
+          }
+        },
+        "box-3": {
+          "type": "box_item",
+          "settings": {
+            "glyph": "❖",
+            "title": "Silver Polishing Cloth",
+            "body": "For the gentle at-home clean between wears."
+          }
+        },
+        "box-4": {
+          "type": "box_item",
+          "settings": {
+            "glyph": "✿",
+            "title": "Your Silver Play Piece",
+            "body": "Individually assayed and laser-hallmarked before it ships."
+          }
+        }
+      },
+      "block_order": ["step-1", "step-2", "step-3", "box-1", "box-2", "box-3", "box-4"]
+    }
+  },
+  "order": ["main"]
+}

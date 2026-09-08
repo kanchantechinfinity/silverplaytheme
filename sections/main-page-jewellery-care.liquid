@@ -1,0 +1,94 @@
+<section class="page-hero" data-page-hero>
+  <div class="page-hero__bg">
+    <img src="{{ section.settings.hero_image | default: 'https://silverplay.in/cdn/shop/files/SP_Website_Banners_10_800x1200_crop_center.png?v=1783577220' }}" alt="{{ section.settings.heading }}" loading="eager">
+  </div>
+  <div class="page-hero__content">
+    <p class="eyebrow" style="color:var(--sp-ash-3);">{{ section.settings.eyebrow | default: "Care Guide" }}</p>
+    <h1 class="reveal">{{ section.settings.heading | default: "Caring for Your Silver" }}</h1>
+    <p class="desc reveal">{{ section.settings.description | default: "Every Silver Play piece is handcrafted in 925 sterling silver — 92.5% pure silver and 7.5% other metals for strength, stamped '925' on every piece. With a little care, it will last a lifetime." }}</p>
+  </div>
+</section>
+
+<section class="split-row split-row--ink">
+  <div class="sp-container">
+    <div class="section-head reveal">
+      <p class="eyebrow">{{ section.settings.steps_eyebrow | default: "Everyday Care" }}</p>
+      <h2 style="color:var(--sp-bone);">{{ section.settings.steps_heading | default: "Three Simple Habits" }}</h2>
+    </div>
+    <div class="vision-grid">
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'care_step' -%}
+          <div class="gold-card reveal" {{ block.shopify_attributes }}>
+            <div class="gold-card__inner">
+              <span class="gold-card__glyph" aria-hidden="true">{{ block.settings.glyph }}</span>
+              <h3 class="gold-card__title">{{ block.settings.title }}</h3>
+              <p class="gold-card__body">{{ block.settings.body }}</p>
+            </div>
+          </div>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+<section class="split-row split-row--bone-2">
+  <div class="sp-container">
+    <div class="section-head reveal">
+      <p class="eyebrow">{{ section.settings.box_eyebrow | default: "Unboxing" }}</p>
+      <h2>{{ section.settings.box_heading | default: "What's In Every Box" }}</h2>
+    </div>
+    <div class="vision-grid" style="grid-template-columns:repeat(2,1fr);">
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'box_item' -%}
+          <div class="gold-card reveal" {{ block.shopify_attributes }}>
+            <div class="gold-card__inner">
+              <span class="gold-card__glyph" aria-hidden="true">{{ block.settings.glyph }}</span>
+              <h3 class="gold-card__title">{{ block.settings.title }}</h3>
+              <p class="gold-card__body">{{ block.settings.body }}</p>
+            </div>
+          </div>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Jewellery care page",
+  "settings": [
+    { "type": "header", "content": "Banner" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Care Guide" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Caring for Your Silver" },
+    { "type": "textarea", "id": "description", "label": "Description" },
+    { "type": "url", "id": "hero_image", "label": "Banner image" },
+    { "type": "header", "content": "Everyday care section" },
+    { "type": "text", "id": "steps_eyebrow", "label": "Eyebrow", "default": "Everyday Care" },
+    { "type": "text", "id": "steps_heading", "label": "Heading", "default": "Three Simple Habits" },
+    { "type": "header", "content": "Unboxing section" },
+    { "type": "text", "id": "box_eyebrow", "label": "Eyebrow", "default": "Unboxing" },
+    { "type": "text", "id": "box_heading", "label": "Heading", "default": "What's In Every Box" }
+  ],
+  "blocks": [
+    {
+      "type": "care_step",
+      "name": "Care step",
+      "settings": [
+        { "type": "text", "id": "glyph", "label": "Glyph", "default": "◈" },
+        { "type": "text", "id": "title", "label": "Title" },
+        { "type": "textarea", "id": "body", "label": "Body" }
+      ]
+    },
+    {
+      "type": "box_item",
+      "name": "Box item",
+      "settings": [
+        { "type": "text", "id": "glyph", "label": "Glyph", "default": "✦" },
+        { "type": "text", "id": "title", "label": "Title" },
+        { "type": "textarea", "id": "body", "label": "Body" }
+      ]
+    }
+  ],
+  "presets": [{ "name": "Jewellery care page" }]
+}
+{% endschema %}
